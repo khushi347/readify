@@ -3,17 +3,17 @@ import {
   createBook,
   getAllBooks,
   getBookById,
-  rateBook
+  rateBook,
+  searchBooks
 } from "../controllers/book.controller.js";
 
 const router = express.Router();
 
-router.post("/create", createBook);
-
+router.get("/search", searchBooks);
 router.get("/", getAllBooks);
-
-router.get("/:bookId", getBookById);
-
+router.get("/:id", getBookById);
+router.post("/create", createBook);
 router.post("/:bookId/rate", rateBook);
+
 
 export default router;

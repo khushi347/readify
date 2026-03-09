@@ -1,10 +1,7 @@
 import Book from "../models/book.js";
 import BookRating from "../models/bookRating.js";
+import { importBooksFromGoogle } from "../services/bookImport.service.js";
 
-
-//
-// 📘 Create Book (Admin / Seeding)
-//
 export const createBook = async (req, res) => {
   try {
     const { title, author, totalPages, description, coverImage } = req.body;
@@ -33,13 +30,11 @@ export const createBook = async (req, res) => {
   }
 };
 
-
-//
-// 📚 Get All Books
-//
 export const getAllBooks = async (req, res) => {
   try {
-    const books = await Book.find().sort({ createdAt: -1 });
+    const books = await Book.find()
+    .sort({ createdAt: -1 })
+    .limit(20);
     return res.status(200).json(books);
 
   } catch (error) {
@@ -50,15 +45,11 @@ export const getAllBooks = async (req, res) => {
   }
 };
 
-
-//
-// 📖 Get Single Book
-//
 export const getBookById = async (req, res) => {
   try {
-    const { bookId } = req.params;
+    const { id } = req.params;
 
-    const book = await Book.findById(bookId);
+    const book = await Book.findById(id);
 
     if (!book) {
       return res.status(404).json({
@@ -76,10 +67,6 @@ export const getBookById = async (req, res) => {
   }
 };
 
-
-//
-// ⭐ Rate Book (Instagram-style logic)
-//
 export const rateBook = async (req, res) => {
   try {
     const { bookId } = req.params;
@@ -139,3 +126,28 @@ export const rateBook = async (req, res) => {
     });
   }
 };
+
+export const searchBooks=async(req,res)=>{
+  try{
+    const {q}=req.query;
+    if(!q){
+      return res.status(400).json({message:"Search query required"});
+    }
+
+    let books=await Book.find({
+      $text:{$search:q}
+    }).limit(10);
+
+    if(books.length===0){
+      books=await importBooksFromGoogle(q)
+    }
+
+    return res.status(200).json({
+      success:true,
+      books
+    }); 
+  }
+  catch(error){
+    return res.status(500).json({message:"Failed to fetch books",error:error.message});
+  }
+}

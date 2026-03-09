@@ -37,7 +37,7 @@ export const addToShelf = async (req, res) => {
       book: bookId,
     });
 
-    const populated=await userBook.populate("book");
+    const populated=await userBook.populate("book","title author coverImage totalPages");
 
     return res.status(201).json({
       success: true,
@@ -58,14 +58,14 @@ export const addToShelf = async (req, res) => {
 //
 export const getUserShelf = async (req, res) => {
   try {
-    const books = await UserBook.find({
+    const shelf = await UserBook.find({
       user: req.userId,
     })
-      .populate("book")
+      .populate("book","title author coverImage totalPages")
       .sort({ createdAt: -1 });
 
     return res.status(200).json({
-      books,
+      shelf,
     });
 
   } catch (error) {
@@ -82,17 +82,20 @@ export const getUserShelf = async (req, res) => {
 //
 export const updateStatus = async (req, res) => {
   try {
-    const { status } = req.body;
+    const {status}=req.body;
 
-    if (!["want", "reading", "completed"].includes(status)) {
-      return res.status(400).json({
-        message: "Invalid status value",
-      });
+    if(!["want","reading","completed"].includes(status)){
+      return res.status(400).json({message:"Invalid status value"});
+    }
+    const updateData={status};
+
+    if(status==="completed"){
+      updateData.progress=100;
     }
 
     const userBook = await UserBook.findOneAndUpdate(
       { _id: req.params.id, user: req.userId },
-      { status },
+      updateData,
       { new: true }
     );
 
@@ -123,9 +126,15 @@ export const updateProgress = async (req, res) => {
       });
     }
 
+    const updateData = { progress };
+
+    if (progress === 100) {
+      updateData.status = "completed";
+    }
+
     const userBook = await UserBook.findOneAndUpdate(
       { _id: req.params.id, user: req.userId },
-      { progress },
+      updateData,
       { new: true }
     );
 
@@ -142,5 +151,19 @@ export const updateProgress = async (req, res) => {
       message: "Failed to update progress",
       error: error.message,
     });
+  }
+};
+
+export const removeShelf=async(req,res)=>{
+  try{
+    const deleted=await UserBook.findOneAndDelete({_id:req.params.id,user:req.userId});
+
+    if(!deleted){
+      return res.status(404).json({message:"Book not found in shelf"});
+    }
+
+    return res.status(200).json({message:"Book removed from shelf"});
+  } catch(error){
+    return res.status(500).json({message:"Failed to remove book",error:error.message});
   }
 };
