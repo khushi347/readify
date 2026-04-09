@@ -1,69 +1,125 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
-import { gsap } from "gsap";
-
+import API from "../api/axios";
 import BookCard from "../components/BookCard";
-import "./Explore.css";
+import { Link } from "react-router-dom";
 
 function Explore() {
-
   const [books, setBooks] = useState([]);
+  const [query, setQuery] = useState("");
 
-  // Fetch books
+  // 🔹 Fetch all books on load
   useEffect(() => {
     fetchBooks();
-
-    // Animate hero section
-    gsap.from(".explore-hero", {
-      y: 40,
-      opacity: 0,
-      duration: 1,
-      ease: "power3.out"
-    });
-
   }, []);
 
   const fetchBooks = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/books");
-      setBooks(res.data);
+      const res = await API.get("/book");
+      setBooks(res.data.book);
     } catch (error) {
       console.error("Error fetching books:", error);
     }
   };
 
-  // Animate cards AFTER books render
-  useEffect(() => {
+  // 🔍 Search books
+  const searchBooks = async () => {
+    try {
+      if (query.trim() === "") return;
 
-    if (books.length === 0) return;
+      const res = await API.get(`/books/search?q=${query}`);
+      setBooks(res.data.books);
+    } catch (error) {
+      console.error("Error searching books:", error);
+    }
+  };
 
-    gsap.from(".book-card", {
-      y: 40,
-      opacity: 0,
-      stagger: 0.1,
-      duration: 0.8,
-      ease: "power3.out"
-    });
-
-  }, [books]);
+  // 🔄 Clear search
+  const clearSearch = () => {
+    setQuery("");
+    fetchBooks();
+  };
 
   return (
     <div className="explore-page">
-  <div className="explore-container">
+      <div className="explore-container">
 
-    <div className="explore-hero">
-      <h1>Discover Your Next Book</h1>
-      <input className="search-bar" placeholder="Search books..." />
+        {/* 🔥 Hero Section */}
+        <div className="explore-hero">
+          <h1>📚 Discover Your Next Book</h1>
+
+          <div style={{ marginTop: "20px" }}>
+            <input
+              type="text"
+              placeholder="Search books..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  searchBooks();
+                }
+              }}
+              style={{
+                padding: "10px",
+                width: "250px",
+                borderRadius: "6px",
+                border: "1px solid #ccc"
+              }}
+            />
+
+            <button
+              onClick={searchBooks}
+              style={{
+                marginLeft: "10px",
+                padding: "10px 14px",
+                borderRadius: "6px",
+                backgroundColor: "#5BC0BE",
+                color: "white",
+                border: "none",
+                cursor: "pointer"
+              }}
+            >
+              Search
+            </button>
+
+            <button
+              onClick={clearSearch}
+              style={{
+                marginLeft: "10px",
+                padding: "10px 14px",
+                borderRadius: "6px",
+                backgroundColor: "#ccc",
+                border: "none",
+                cursor: "pointer"
+              }}
+            >
+              Clear
+            </button>
+          </div>
+        </div>
+
+        {/* 📚 Books Grid */}
+        <div
+          className="books-grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))",
+            gap: "20px",
+            marginTop: "40px"
+          }}
+        >
+          {books.length > 0 ? (
+            books.map((book) => (
+              <Link key={book._id} to={`/book/${book._id}`}>
+                <BookCard book={book} />
+              </Link>
+            ))
+          ) : (
+            <p>No books found</p>
+          )}
+        </div>
+
+      </div>
     </div>
-
-    <div className="books-grid">
-      {books.map((book) => (
-        <BookCard key={book._id} book={book} />
-      ))}
-    </div>
-
-  </div>
-</div>
   );
 }
 

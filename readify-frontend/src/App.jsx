@@ -4,6 +4,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import BookShelf from "./pages/BookShelf";
 import Explore from "./pages/Explore";
 import Navbar from "./components/Navbar";
+import Logo from "./components/Logo";
+import BookPage from "./pages/BookPage"
 
 function Dashboard(){
     return <h1>Dashboard</h1>
@@ -12,6 +14,7 @@ function Dashboard(){
 function App(){
     return (
        <>
+       
        <BrowserRouter>
         <Navbar/>
         
@@ -46,6 +49,8 @@ function App(){
               element={
               <Explore/>
               }/>
+
+              <Route path="/book/:id" element={<BookPage/>}/>
 
         </Routes>
         </div>

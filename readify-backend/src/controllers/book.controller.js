@@ -130,7 +130,7 @@ export const rateBook = async (req, res) => {
 export const searchBooks=async(req,res)=>{
   try{
     const {q}=req.query;
-    if(!q){
+    if(!q || q.trim()===" "){
       return res.status(400).json({message:"Search query required"});
     }
 

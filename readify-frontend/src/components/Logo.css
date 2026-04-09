@@ -1,0 +1,11 @@
+.logo{
+  position:fixed;
+  top:25px;
+  left:40px;
+  z-index:1000;
+}
+
+.logo img{
+  height:100px;
+  cursor:pointer;
+}
