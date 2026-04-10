@@ -37,17 +37,17 @@ const BookPage = () => {
             <p>Book description: {book.description}</p>
             <img src={book.coverImage || "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg"} alt="{book.title}" />
             <div style={{ marginTop: "20px" }}>
-                <button onClick={() => addToShelf("want_to_read")}>
+                <button onClick={() => addToShelf("want")}>
                     Want to Read
-                </button>
+                    </button>
 
-                <button onClick={() => addToShelf("currently_reading")}>
+                    <button onClick={() => addToShelf("reading")}>
                     Currently Reading
-                </button>
+                    </button>
 
-                <button onClick={() => addToShelf("completed")}>
+                    <button onClick={() => addToShelf("completed")}>
                     Completed
-                </button>
+                    </button>
             </div>
         </div>
     );

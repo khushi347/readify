@@ -6,7 +6,7 @@ import Book from "../models/book.js";
 //
 export const addToShelf = async (req, res) => {
   try {
-    const { bookId } = req.body;
+    const { bookId,status } = req.body;
 
     if (!bookId) {
       return res.status(400).json({
@@ -35,6 +35,7 @@ export const addToShelf = async (req, res) => {
     const userBook = await UserBook.create({
       user: req.userId,
       book: bookId,
+      status,
     });
 
     const populated=await userBook.populate("book","title author coverImage totalPages");

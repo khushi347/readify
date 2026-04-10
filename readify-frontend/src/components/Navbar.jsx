@@ -11,7 +11,7 @@ function Navbar() {
       <PillNav
         items={[
           { label: "Explore", href: "/explore" },
-          { label: "My Shelf", href: "/shelf" },
+          { label: "My Shelf", href: "/bookshelf" },
           { label: "Community", href: "/community" },
           { label: "Profile", href: "/profile" }
         ]}
