@@ -15,7 +15,7 @@ export const protect=(req,res,next)=>{
             process.env.ACCESS_TOKEN_SECRET
         );
 
-        req.userId=decoded.id;
+        req.user = { _id: decoded.id };
 
         next();
     }
