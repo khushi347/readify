@@ -1,13 +1,16 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation} from "react-router-dom";
 
 const Login = () => {
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location=useLocation();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const from=location.state?.from?.pathname || "/dashboard";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,7 +18,7 @@ const Login = () => {
     try {
       await login(email, password);
 
-      navigate("/bookshelf");   // 👈 redirect after login
+      navigate(from,{replace:true});   // 👈 redirect after login
 
     } catch (error) {
       console.error(error);

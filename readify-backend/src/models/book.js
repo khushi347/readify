@@ -24,7 +24,7 @@ const bookSchema=new mongoose.Schema(
             default:"",
         },
 
-        genres:{
+        genre:{
             type:[String],
             default:[]
         },

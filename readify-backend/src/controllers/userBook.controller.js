@@ -1,12 +1,10 @@
 import UserBook from "../models/userBook.js";
 import Book from "../models/book.js";
 
-//
-// 📚 Add Book to Shelf
-//
+//  Add Book to Shelf
 export const addToShelf = async (req, res) => {
   try {
-    const { bookId,status } = req.body;
+    const { bookId, status } = req.body;
 
     if (!bookId) {
       return res.status(400).json({
@@ -22,7 +20,7 @@ export const addToShelf = async (req, res) => {
     }
 
     const alreadyExists = await UserBook.findOne({
-      user: req.userId,
+      user: req.user._id, 
       book: bookId,
     });
 
@@ -33,16 +31,19 @@ export const addToShelf = async (req, res) => {
     }
 
     const userBook = await UserBook.create({
-      user: req.userId,
+      user: req.user._id, 
       book: bookId,
       status,
     });
 
-    const populated=await userBook.populate("book","title author coverImage totalPages");
+    const populated = await userBook.populate(
+      "book",
+      "title author coverImage totalPages"
+    );
 
     return res.status(201).json({
       success: true,
-      userBook:populated
+      userBook: populated,
     });
 
   } catch (error) {
@@ -53,16 +54,13 @@ export const addToShelf = async (req, res) => {
   }
 };
 
-
-//
-// 📖 Get User Shelf
-//
+//  Get User Shelf
 export const getUserShelf = async (req, res) => {
   try {
     const shelf = await UserBook.find({
-      user: req.userId,
+      user: req.user._id,
     })
-      .populate("book","title author coverImage totalPages")
+      .populate("book", "title author coverImage totalPages")
       .sort({ createdAt: -1 });
 
     return res.status(200).json({
@@ -77,25 +75,26 @@ export const getUserShelf = async (req, res) => {
   }
 };
 
+// Update Reading Status
 
-//
-// 🔄 Update Reading Status
-//
 export const updateStatus = async (req, res) => {
   try {
-    const {status}=req.body;
+    const { status } = req.body;
 
-    if(!["want","reading","completed"].includes(status)){
-      return res.status(400).json({message:"Invalid status value"});
+    if (!["want", "reading", "completed"].includes(status)) {
+      return res.status(400).json({
+        message: "Invalid status value",
+      });
     }
-    const updateData={status};
 
-    if(status==="completed"){
-      updateData.progress=100;
+    const updateData = { status };
+
+    if (status === "completed") {
+      updateData.progress = 100;
     }
 
     const userBook = await UserBook.findOneAndUpdate(
-      { _id: req.params.id, user: req.userId },
+      { _id: req.params.id, user: req.user._id }, 
       updateData,
       { new: true }
     );
@@ -116,7 +115,7 @@ export const updateStatus = async (req, res) => {
   }
 };
 
-
+// 📊 Update Progress
 export const updateProgress = async (req, res) => {
   try {
     const { progress } = req.body;
@@ -134,7 +133,7 @@ export const updateProgress = async (req, res) => {
     }
 
     const userBook = await UserBook.findOneAndUpdate(
-      { _id: req.params.id, user: req.userId },
+      { _id: req.params.id, user: req.user._id }, 
       updateData,
       { new: true }
     );
@@ -155,16 +154,28 @@ export const updateProgress = async (req, res) => {
   }
 };
 
-export const removeShelf=async(req,res)=>{
-  try{
-    const deleted=await UserBook.findOneAndDelete({_id:req.params.id,user:req.userId});
+// Remove Book from Shelf
+export const removeShelf = async (req, res) => {
+  try {
+    const deleted = await UserBook.findOneAndDelete({
+      _id: req.params.id,
+      user: req.user._id, 
+    });
 
-    if(!deleted){
-      return res.status(404).json({message:"Book not found in shelf"});
+    if (!deleted) {
+      return res.status(404).json({
+        message: "Book not found in shelf",
+      });
     }
 
-    return res.status(200).json({message:"Book removed from shelf"});
-  } catch(error){
-    return res.status(500).json({message:"Failed to remove book",error:error.message});
+    return res.status(200).json({
+      message: "Book removed from shelf",
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      message: "Failed to remove book",
+      error: error.message,
+    });
   }
 };

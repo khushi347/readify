@@ -139,7 +139,7 @@ export const searchBooks=async(req,res)=>{
     }).limit(10);
 
     if(books.length===0){
-      books=await importBooksFromGoogle(q)
+      books=await importBooksFromGoogle(q) || [];
     }
 
     return res.status(200).json({

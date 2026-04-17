@@ -6,10 +6,8 @@ import Explore from "./pages/Explore";
 import Navbar from "./components/Navbar";
 import Logo from "./components/Logo";
 import BookPage from "./pages/BookPage"
+import Dashboard from "./pages/Dashboard";
 
-function Dashboard(){
-    return <h1>Dashboard</h1>
-}
 
 function App(){
     return (
@@ -51,6 +49,8 @@ function App(){
               }/>
 
               <Route path="/book/:id" element={<BookPage/>}/>
+
+              <Route path="/dashboard" element={<Dashboard />} />
 
         </Routes>
         </div>
