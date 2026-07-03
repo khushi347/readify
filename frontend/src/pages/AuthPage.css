@@ -1,0 +1,216 @@
+.auth-container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+}
+
+.auth-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Left Side Editorial Column */
+.auth-editorial-panel {
+  position: relative;
+  background-color: #12100E;
+  color: #FAF5F0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-right: 1px solid rgba(250, 245, 240, 0.05);
+}
+
+.auth-panel-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 30% 30%, rgba(197, 160, 115, 0.08) 0%, transparent 70%);
+}
+
+.auth-panel-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 4rem;
+}
+
+.auth-panel-logo {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--accent-gold);
+  color: var(--accent-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-quote-wrapper {
+  margin: auto 0;
+  max-width: 580px;
+}
+
+.auth-quote-mark {
+  font-family: var(--font-serif);
+  font-size: 5rem;
+  line-height: 0.1;
+  color: var(--accent-gold);
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.auth-blockquote {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 1.25rem;
+  line-height: 1.8;
+  color: rgba(250, 245, 240, 0.9);
+  margin-bottom: 2rem;
+  text-align: justify;
+}
+
+.auth-quote-cite {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--accent-gold);
+}
+
+.auth-panel-footer {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: rgba(250, 245, 240, 0.4);
+}
+
+/* Right Side Form Column */
+.auth-form-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 6rem;
+  background-color: var(--bg-primary);
+}
+
+.auth-form-header {
+  margin-bottom: 3.5rem;
+  text-align: left;
+}
+
+.auth-form-title {
+  font-size: 2.2rem;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  margin-bottom: 0.75rem;
+}
+
+.auth-form-subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.auth-input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.auth-input-group label {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-secondary);
+}
+
+.auth-input-group input {
+  width: 100%;
+  padding: 0.75rem 0;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-strong);
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  transition: all 0.3s var(--ease-expo);
+}
+
+.auth-input-group input:focus {
+  border-color: var(--accent-gold);
+  padding-left: 4px;
+}
+
+.auth-submit-btn {
+  margin-top: 1.5rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-toggle {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+}
+
+.auth-toggle span {
+  color: var(--text-muted);
+}
+
+.auth-toggle-btn {
+  background: none;
+  border: none;
+  color: var(--accent-gold);
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: var(--transition-smooth);
+}
+
+.auth-toggle-btn:hover {
+  color: var(--accent-gold-hover);
+  text-decoration: underline;
+}
+
+/* Responsiveness */
+@media (max-width: 968px) {
+  .auth-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .auth-editorial-panel {
+    display: none; /* Hide literary panel on smaller screens */
+  }
+
+  .auth-form-panel {
+    padding: 3rem 2rem;
+  }
+}

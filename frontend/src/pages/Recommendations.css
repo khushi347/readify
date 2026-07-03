@@ -1,0 +1,234 @@
+.recommendations-container {
+  padding-bottom: 6rem;
+  min-height: calc(100vh - 80px);
+}
+
+.recs-header {
+  margin-top: 2.5rem;
+  margin-bottom: 3rem;
+  text-align: left;
+}
+
+.recs-header h2 {
+  font-size: 2.2rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.recs-header p {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+}
+
+/* 1. Mood Selectors Row */
+.mood-selectors-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.mood-button {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  text-align: left;
+  transition: all 0.3s var(--ease-expo);
+  box-shadow: var(--shadow-sm);
+}
+
+.mood-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-strong);
+}
+
+.mood-button.active {
+  border-color: var(--accent-gold);
+  background-color: var(--accent-gold-light);
+  box-shadow: 0 4px 15px rgba(197, 160, 115, 0.1);
+}
+
+.mood-icon {
+  color: var(--text-muted);
+  transition: color 0.3s;
+}
+
+.mood-button.active .mood-icon {
+  color: var(--accent-gold);
+}
+
+.mood-btn-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.mood-btn-text strong {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.mood-btn-text span {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+/* 2. Curation Panel viewport */
+.recs-viewport {
+  width: 100%;
+}
+
+.recs-cards-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.rec-card-box {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: 2.5rem;
+  overflow: hidden;
+  transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
+}
+
+.rec-card-box:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.rec-card-body {
+  display: flex;
+  gap: 4rem;
+  align-items: center;
+}
+
+.rec-card-left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rec-book-visual-wrapper {
+  transform: scale(0.9);
+}
+
+.rec-card-right {
+  flex: 1;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+}
+
+.rec-editorial-stamp {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--accent-gold-hover);
+  letter-spacing: 2px;
+  background-color: var(--accent-gold-light);
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.rec-card-right h3 {
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+
+.rec-author {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.rec-synopsis {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  text-align: justify;
+}
+
+.rec-why-box {
+  background-color: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  margin-top: 1rem;
+  width: 100%;
+  border-left: 3px solid var(--accent-gold);
+}
+
+.rec-why-box strong {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  letter-spacing: 1px;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.rec-why-box p {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.rec-actions {
+  margin-top: 1.5rem;
+}
+
+.rec-add-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.rec-add-btn.added {
+  border-color: #2e7d32;
+  color: #2e7d32;
+  background-color: rgba(46, 125, 50, 0.05);
+  cursor: default;
+  box-shadow: none;
+}
+
+/* Responsiveness */
+@media (max-width: 968px) {
+  .mood-selectors-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .rec-card-body {
+    flex-direction: column;
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 580px) {
+  .mood-selectors-grid {
+    grid-template-columns: 1fr;
+  }
+}

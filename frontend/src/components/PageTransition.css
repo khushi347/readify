@@ -1,0 +1,67 @@
+.page-transition-container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.page-sweep-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 120vw; /* Wide to cover corners during skew */
+  height: 100vh;
+  background: linear-gradient(to right, #FAF8F5, #EDE6DC 70%, #D8CFC0 95%, #A89C8A 100%);
+  z-index: 9999;
+  pointer-events: none;
+  box-shadow: -15px 0 35px rgba(28, 21, 14, 0.15), 15px 0 35px rgba(0, 0, 0, 0.05);
+  transform-origin: bottom left;
+}
+
+.page-sweep-shadow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 10%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, rgba(28, 21, 14, 0.08));
+}
+
+.page-content-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Custom transitions for components entering inside pages */
+.fade-in-element {
+  opacity: 0;
+  transform: translateY(15px);
+  animation: elementEnter 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes elementEnter {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile responsive adjustments for screens below 768px */
+@media (max-width: 768px) {
+  .page-sweep-overlay {
+    left: -5vw !important;
+    transform: scale(0.4) translateX(-100%) skewX(-10deg) !important;
+    transform-origin: left center !important;
+    opacity: 0.12 !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+  }
+
+  .page-content-wrapper {
+    position: relative;
+    z-index: 2;
+  }
+}
+

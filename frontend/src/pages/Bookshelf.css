@@ -1,0 +1,433 @@
+.bookshelf-container {
+  padding-bottom: 6rem;
+  min-height: calc(100vh - 80px);
+}
+
+.bookshelf-header {
+  margin-top: 2.5rem;
+  margin-bottom: 3.5rem;
+  text-align: left;
+}
+
+.bookshelf-header h2 {
+  font-size: 2.2rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.bookshelf-header p {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+}
+
+/* 1. tactile shelves */
+.shelves-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4.5rem;
+}
+
+.bookshelf-shelf {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.shelf-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.shelf-header h3 {
+  font-size: 1.35rem;
+  font-weight: 500;
+}
+
+.shelf-count {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.shelf-books-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3.5rem;
+  min-height: 250px;
+  padding: 0 1.5rem;
+  align-items: flex-end;
+  position: relative;
+  z-index: 2;
+}
+
+.shelf-book-item-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Soft shadow reflecting under book covers */
+.book-shadow-reflection {
+  position: absolute;
+  bottom: -15px;
+  width: 90%;
+  height: 10px;
+  background: radial-gradient(ellipse at center, rgba(28, 21, 14, 0.15) 0%, transparent 70%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Wooden shelf plank visual */
+.wooden-shelf-plank {
+  height: 8px;
+  width: 100%;
+  background: linear-gradient(to right, #2B1E17, #3E2F26 15%, #503E33 50%, #3E2F26 85%, #2B1E17 100%);
+  border-radius: 4px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.05);
+  margin-top: 5px;
+  position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.wooden-shelf-plank::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, rgba(197, 160, 115, 0.3), rgba(197, 160, 115, 0.1) 50%, rgba(197, 160, 115, 0.3));
+}
+
+.shelf-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 140px;
+  height: 220px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.empty-slot-outline {
+  width: 100%;
+  height: 100%;
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-sm);
+  opacity: 0.3;
+}
+
+.empty-slot-text {
+  position: absolute;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+
+/* 2. Book Detail Drawer */
+.bookshelf-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.bookshelf-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(28, 21, 14, 0.25);
+  backdrop-filter: blur(4px);
+}
+
+.bookshelf-drawer {
+  position: relative;
+  width: 48vw;
+  max-width: 700px;
+  min-width: 450px;
+  height: 100%;
+  background-color: var(--bg-primary);
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+  border-left: 1px solid var(--border-color);
+}
+
+.drawer-actions {
+  padding: 1.5rem 2rem 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.close-drawer-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: color 0.3s;
+}
+
+.close-drawer-btn:hover {
+  color: var(--text-primary);
+}
+
+.drawer-scroll-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 3rem 4rem;
+}
+
+.drawer-book-stage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0 3rem;
+  perspective: 1200px;
+}
+
+.drawer-book-wrapper {
+  transform: scale(1.1);
+}
+
+.drawer-editorial-pane {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.drawer-sub {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  letter-spacing: 2px;
+}
+
+.drawer-title {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-top: 0.25rem;
+}
+
+.drawer-author {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.drawer-sec-title {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  letter-spacing: 1.5px;
+  margin-bottom: 0.75rem;
+  border-left: 2px solid var(--accent-gold);
+  padding-left: 0.5rem;
+}
+
+.drawer-synopsis {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  text-align: justify;
+}
+
+.grid-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.drawer-select {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 0.6rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  width: 100%;
+}
+
+.drawer-rating-row {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.5rem 0;
+}
+
+.star-icon {
+  color: var(--border-strong);
+  cursor: pointer;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.star-icon:hover {
+  transform: scale(1.15);
+}
+
+.star-icon.filled {
+  color: var(--accent-gold);
+  fill: var(--accent-gold);
+}
+
+/* Progress Logger details */
+.drawer-progress-logger-box {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.logger-stats {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.logger-percent {
+  color: var(--text-primary);
+}
+
+.logger-pages {
+  color: var(--text-muted);
+}
+
+.logger-bar {
+  height: 4px;
+  background-color: var(--border-strong);
+  border-radius: 2px;
+  width: 100%;
+}
+
+.logger-bar-fill {
+  height: 100%;
+  background-color: var(--accent-gold);
+  border-radius: 2px;
+}
+
+.progress-edit-trigger-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent-gold-hover);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: 0.25rem;
+  align-self: flex-start;
+}
+
+.progress-edit-trigger-btn:hover {
+  text-decoration: underline;
+}
+
+.progress-edit-form {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.progress-edit-input {
+  width: 80px;
+  padding: 0.4rem;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-card);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+}
+
+.progress-edit-submit-btn {
+  padding: 0.4rem 1rem;
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.progress-edit-submit-btn:hover {
+  background-color: var(--accent-gold);
+}
+
+/* Highlights list styling */
+.drawer-highlights-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.drawer-highlight-item {
+  border-left: 2px solid var(--border-strong);
+  padding-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.drawer-highlight-item p {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.drawer-highlight-item .date {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.no-highlights-text {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .bookshelf-drawer {
+    width: 100vw;
+    min-width: 100vw;
+  }
+}

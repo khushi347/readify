@@ -1,0 +1,160 @@
+/* Readify Design System & Global Styles */
+
+:root {
+  /* Fonts */
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-body: 'Lora', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Colors - Light Parchment Theme */
+  --bg-primary: #FAF8F5;
+  --bg-secondary: #F4EFEA;
+  --bg-card: #FFFFFF;
+  --text-primary: #1C150E;
+  --text-secondary: #5C5248;
+  --text-muted: #8E8376;
+  --border-color: rgba(28, 21, 14, 0.08);
+  --border-strong: rgba(28, 21, 14, 0.16);
+  
+  /* Accent Colors */
+  --accent-gold: #C5A073;
+  --accent-gold-hover: #B48F62;
+  --accent-gold-light: rgba(197, 160, 115, 0.1);
+  --accent-crimson: #9C4B33;
+  --accent-crimson-hover: #8B3E27;
+  --accent-crimson-light: rgba(156, 75, 51, 0.08);
+  --accent-slate: #546670;
+  
+  /* Shadows & Radius */
+  --shadow-sm: 0 2px 8px rgba(28, 21, 14, 0.04);
+  --shadow-md: 0 8px 24px rgba(28, 21, 14, 0.06);
+  --shadow-lg: 0 16px 48px rgba(28, 21, 14, 0.08);
+  --shadow-book: -8px 8px 20px rgba(28, 21, 14, 0.18), 1px 1px 3px rgba(28, 21, 14, 0.1);
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+
+  /* Transitions & Easing */
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Sanctuary Dark Theme overrides */
+.sanctuary-dark {
+  --bg-primary: #110E0C;
+  --bg-secondary: #1A1613;
+  --bg-card: #1D1815;
+  --text-primary: #FAF5F0;
+  --text-secondary: #C3B8AC;
+  --text-muted: #8A7E73;
+  --border-color: rgba(250, 245, 240, 0.08);
+  --border-strong: rgba(250, 245, 240, 0.16);
+  
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.4);
+  --shadow-book: -12px 12px 30px rgba(0, 0, 0, 0.5), 1px 1px 5px rgba(0, 0, 0, 0.2);
+  --accent-gold-light: rgba(197, 160, 115, 0.15);
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  overflow-x: hidden;
+  transition: background-color var(--transition-smooth), color var(--transition-smooth);
+}
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: var(--radius-sm);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-gold);
+}
+
+/* Typography elements */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--text-primary);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+button, input, textarea, select {
+  font-family: inherit;
+  color: inherit;
+  outline: none;
+}
+
+/* Core App container reset */
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+  max-width: 100%;
+  margin: 0;
+  text-align: left;
+  border-inline: none;
+}
+
+/* Common Layout Utilities */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+.editorial-divider {
+  height: 1px;
+  background-color: var(--border-color);
+  width: 100%;
+  margin: 1.5rem 0;
+}
+
+/* Selection */
+::selection {
+  background-color: var(--accent-gold-light);
+  color: var(--text-primary);
+}
+
+/* Mobile responsive layout overrides for screens below 768px */
+@media (max-width: 768px) {
+  html,
+  body,
+  #root {
+    overflow-x: hidden !important;
+  }
+}
+
