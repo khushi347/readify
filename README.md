@@ -1,6 +1,6 @@
 # 📚 Readify
 
-A full-stack book tracking platform that helps readers discover books, organize their personal library, track reading progress, rate books, and write personal reflections. Readify integrates with the Google Books API and provides a seamless reading management experience through a modern React frontend and a secure Node.js backend.
+Readify is a full-stack book tracking platform that helps readers discover books, organize their personal library, track reading progress, rate books, and write personal reflections. It integrates with the Google Books API to provide rich book information and offers a clean, responsive user experience backed by a secure RESTful API.
 
 🌐 **Live Demo:** https://readify-frontend-phi.vercel.app/
 
@@ -8,50 +8,54 @@ A full-stack book tracking platform that helps readers discover books, organize 
 
 ## ✨ Features
 
-### 📖 Book Discovery
-- 🔍 Search books using the Google Books API
-- 📚 View book details and save books to your library
+### 🔐 Authentication
+- Secure JWT-based authentication
+- User Registration & Login
+- Protected Routes & Middleware
+
+### 🔍 Book Discovery
+- Search books using the Google Books API
+- View detailed book information
+- Fast and responsive search experience
 
 ### 📚 Personal Library
-- Add and remove books
+- Add books to your personal library
+- Remove books anytime
 - Organize books into:
-  - Want to Read
-  - Currently Reading
-  - Read
+  - 📖 Want to Read
+  - 📚 Currently Reading
+  - ✅ Read
 
-### 📊 Reading Progress
+### 📈 Reading Progress
 - Track reading progress
 - Update reading status
-- Set ratings for completed books
-- Write personal reflections and reviews
+- Rate completed books
+- Write and edit personal reading reflections
 
-### 🔐 Authentication
-- JWT-based authentication
-- User registration & login
-- Protected API routes
+### 📊 Dashboard
+- Library overview
+- Reading progress tracking
+- Personalized reading analytics
 
-### 📈 Dashboard
-- Reading statistics
-- Library summary
-- Progress analytics
-
-### 📱 Responsive UI
-- Optimized for desktop and mobile devices
+### 📱 Responsive Design
+- Mobile-friendly interface
+- Smooth animations and modern UI
 
 ---
 
-# 🛠 Tech Stack
+# 🛠️ Tech Stack
 
 ## Frontend
+
 - React
 - Vite
 - Tailwind CSS
 - Axios
-- Context API
 - Framer Motion
 - GSAP
 
 ## Backend
+
 - Node.js
 - Express.js
 - MongoDB
@@ -70,8 +74,8 @@ A full-stack book tracking platform that helps readers discover books, organize 
 Readify/
 │
 ├── frontend/
-│   ├── src/
 │   ├── public/
+│   ├── src/
 │   ├── package.json
 │   └── ...
 │
@@ -80,8 +84,11 @@ Readify/
 ├── middleware/
 ├── models/
 ├── routes/
+├── utils/
+├── app.js
 ├── server.js
 ├── package.json
+├── package-lock.json
 └── README.md
 ```
 
@@ -89,7 +96,7 @@ Readify/
 
 # 🚀 Getting Started
 
-## Clone the repository
+## 1. Clone the Repository
 
 ```bash
 git clone https://github.com/khushi347/Readify.git
@@ -98,7 +105,7 @@ cd Readify
 
 ---
 
-## Backend Setup
+# ⚙️ Backend Setup
 
 Install backend dependencies
 
@@ -130,7 +137,7 @@ Production
 npm start
 ```
 
-Backend runs on
+Backend runs at
 
 ```
 http://localhost:5000
@@ -138,7 +145,7 @@ http://localhost:5000
 
 ---
 
-## Frontend Setup
+# 🎨 Frontend Setup
 
 Move to the frontend directory
 
@@ -164,7 +171,7 @@ Run the frontend
 npm run dev
 ```
 
-Frontend runs on
+Frontend runs at
 
 ```
 http://localhost:5173
@@ -178,27 +185,50 @@ http://localhost:5173
 |---------|----------|-------------|
 | POST | `/api/auth/register` | Register a new user |
 | POST | `/api/auth/login` | Login |
-| GET | `/api/books/search` | Search books |
-| GET | `/api/library` | Get user's library |
+| GET | `/api/books/search` | Search books using Google Books API |
+| GET | `/api/library` | Fetch user's library |
 | POST | `/api/library` | Add a book |
-| PUT | `/api/library/:id` | Update status, rating or reflection |
+| PUT | `/api/library/:id` | Update reading status, rating or reflection |
 | DELETE | `/api/library/:id` | Remove a book |
+
+---
+
+# 📸 Screenshots
+
+> Add screenshots here after uploading them to the repository.
+
+### 🏠 Home Page
+<img width="1907" height="912" alt="Screenshot 2026-07-04 013132" src="https://github.com/user-attachments/assets/daedf3ac-7e12-4d47-a69f-93b28f570e7c" />
+
+### 📚 Bookshelf
+
+<img width="1887" height="911" alt="Screenshot 2026-07-04 013333" src="https://github.com/user-attachments/assets/41e47eb9-3c91-41f9-b7b8-75d45282f476" />
+
+### 📊 Dashboard
+<img width="1893" height="898" alt="Screenshot 2026-07-04 013641" src="https://github.com/user-attachments/assets/aba0b864-a9b8-477e-9e98-c51329950885" />
+
+
+### 📖 Recommendations
+<img width="1891" height="903" alt="Screenshot 2026-07-04 013833" src="https://github.com/user-attachments/assets/ba3cd6f4-5aa2-4f56-a622-4d2544a6a3cc" />
 
 ---
 
 # 🌐 Live Demo
 
-https://readify-frontend-phi.vercel.app/
+**Frontend:** https://readify-frontend-phi.vercel.app/
 
 ---
 
-# 🔮 Future Improvements
+# 🚀 Future Improvements
 
 - 🌙 Dark Mode
-- 📈 Advanced Reading Statistics
-- 🔄 Refresh Tokens
-- 👥 Social Features
-- 🔥 Reading Streaks
+- 📈 Advanced Reading Analytics
+- 🎯 Reading Goals & Streaks
+- 🤖 AI-powered Book Recommendations
+- 🔄 Refresh Token Authentication
+- 📧 Email Verification
+- 🔑 Forgot Password & Password Reset
+- 👥 Social Reading Features
 - 📄 Swagger API Documentation
 
 ---
@@ -207,4 +237,11 @@ https://readify-frontend-phi.vercel.app/
 
 **Khushi Sharma**
 
-If you found this project helpful, consider giving it a ⭐ on GitHub!
+- GitHub: https://github.com/khushi347
+- LinkedIn: https://www.linkedin.com/in/khushi347/
+
+---
+
+## ⭐ Support
+
+If you found this project helpful, please consider giving it a ⭐ on GitHub. It helps others discover the project and supports future development.
