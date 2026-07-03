@@ -238,10 +238,9 @@ http://localhost:5173
 **Khushi Sharma**
 
 - GitHub: https://github.com/khushi347
-- LinkedIn: https://www.linkedin.com/in/khushi347/
-
+- LinkedIn: https://www.linkedin.com/in/khushi-sharma-165b40293/
 ---
 
 ## ⭐ Support
 
-If you found this project helpful, please consider giving it a ⭐ on GitHub. It helps others discover the project and supports future development.
+If you found this project helpful, please consider giving it a ⭐ on GitHub. 
