@@ -22,9 +22,13 @@ const fetchBooks = async (query) => {
     }));
 };
 
+
 const searchBooks = (query) => fetchBooks(query);
 
-const searchBooksByGenre = (genre) => fetchBooks(`subject:${genre}`);
+const currentYear = new Date().getFullYear() - 5; // last 5 years
+
+const searchBooksByGenre = (genre) =>
+    fetchBooks(`subject:${genre} after:${currentYear}`);
 
 module.exports = {
     searchBooks,
